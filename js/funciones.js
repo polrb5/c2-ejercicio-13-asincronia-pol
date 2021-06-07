@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import { personajes } from "./personajes.js";
 
 export const getPersonajes = () =>
