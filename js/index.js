@@ -5,9 +5,11 @@ import { getPersonajes, mataPersonajes } from "./funciones.js";
 const personajesElementos = document.querySelector(".personajes");
 const botonCargarPersonajes = document.querySelector(".cargar-personajes");
 const botonMatarFamilia = document.querySelector(".matar-familia");
+const familia = document.querySelector(".familia");
+const mensajeError = document.querySelector(".mensaje");
 
 const vaciarPersonajes = () => {
-  for (const personaje of personajesElementos.querySelectorAll(".personaje")) {
+  for (const personaje of personajesElementos.querySelectorAll(".personajes")) {
     personaje.remove();
   }
 };
@@ -25,6 +27,7 @@ const pintarPersonajes = (personajes) => {
     personajeMolde.querySelector(".estado").textContent = estado
       ? "vivo"
       : "muerto";
+    console.log(personajes);
     personajesElementos.append(personajeMolde);
   }
 };
@@ -34,4 +37,14 @@ const cargarPersonajes = async () => {
   pintarPersonajes(personajes);
 };
 
+const matarPersonajes = async () => {
+  try {
+    const personajesMuertos = await mataPersonajes(familia.value);
+    pintarPersonajes(personajesMuertos);
+  } catch (error) {
+    mensajeError.textContent = error.message;
+  }
+};
+
 botonCargarPersonajes.addEventListener("click", cargarPersonajes);
+botonMatarFamilia.addEventListener("click", matarPersonajes);
