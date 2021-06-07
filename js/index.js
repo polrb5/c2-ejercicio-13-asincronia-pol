@@ -2,14 +2,14 @@
 import { getPersonajes, mataPersonajes } from "./funciones.js";
 
 // Elementos DOM
-const personajesElemento = document.querySelector(".personajes");
-const personajeDummy = document.querySelector(".personaje.dummy");
+const personajesElementos = document.querySelector(".personajes");
 const botonCargarPersonajes = document.querySelector(".cargar-personajes");
 const botonMatarFamilia = document.querySelector(".matar-familia");
 
 const vaciarPersonajes = () => {
-  for (const personjesElemento of personajesElemento.querySelector("personaje"))
-    personajesElemento.remove();
+  for (const personaje of personajesElementos.querySelectorAll(".personaje")) {
+    personaje.remove();
+  }
 };
 
 const pintarPersonajes = (personajes) => {
@@ -25,5 +25,13 @@ const pintarPersonajes = (personajes) => {
     personajeMolde.querySelector(".estado").textContent = estado
       ? "vivo"
       : "muerto";
+    personajesElementos.append(personajeMolde);
   }
 };
+
+const cargarPersonajes = async () => {
+  const personajes = await getPersonajes();
+  pintarPersonajes(personajes);
+};
+
+botonCargarPersonajes.addEventListener("click", cargarPersonajes);
