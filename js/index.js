@@ -17,14 +17,14 @@ const vaciarPersonajes = () => {
 const pintarPersonajes = (personajes) => {
   vaciarPersonajes();
   for (const personaje of personajes) {
-    const { nombre, familia, estado } = personaje;
+    const { nombre, familia, vivo } = personaje;
     const personajeMolde = document
       .querySelector(".personaje-dummy")
       .cloneNode(true);
     personajeMolde.classList.remove("personaje-dummy");
     personajeMolde.querySelector(".nombre").textContent = nombre;
     personajeMolde.querySelector(".familia").textContent = familia;
-    personajeMolde.querySelector(".estado").textContent = estado
+    personajeMolde.querySelector(".estado").textContent = vivo
       ? "vivo"
       : "muerto";
     console.log(personajes);
